@@ -1,0 +1,9 @@
+{% extends 'generic/object_list.html' %}
+{% load i18n %}
+
+{% block bulk_buttons %}
+    <button type="submit" name="_test" {% formaction %}="{% url 'phone:numberassignment_test' %}" class="btn btn-primary">
+      <i class="mdi mdi-sync" aria-hidden="true"></i> {% trans "Test" %}
+    </button>
+  {{ block.super }}
+{% endblock %}

@@ -403,6 +403,7 @@ INSTALLED_APPS = [
     'virtualization',
     'vpn',
     'wireless',
+    'phone',
     'django_rq',  # Must come after extras to allow overriding management commands
     'drf_spectacular',
     'drf_spectacular_sidecar',

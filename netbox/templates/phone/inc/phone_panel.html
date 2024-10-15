@@ -1,0 +1,33 @@
+{% load helpers %}
+{% if perms.phone.view_numberassigment %}
+    <div class="card">
+        <h5 class="card-header">Assigned Numbers</h5>
+        <div class="card-body">
+            
+                {% if number_assignment.exists %}
+                    <form id="numberassignment_form">
+                        {% csrf_token %}
+                    </form>
+                    <table class="table table-hover">
+                        <tr>
+                            <th>Number</th>
+                            <th>Role</th>
+                            <th></th>
+                        </tr>
+                        {% for number in number_assignment %}
+                            <tr>
+                                <td>{{ number.number|linkify }}</td>
+                                <td>{{ number.role }}</td>
+                                <td class="text-end noprint">
+                                   
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                {% else %}
+                    <div class="text-muted">None</div>
+                {% endif %}
+            
+        </div>
+    </div>
+{% endif %}

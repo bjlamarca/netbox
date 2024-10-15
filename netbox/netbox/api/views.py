@@ -41,6 +41,7 @@ class APIRootView(APIView):
             'virtualization': reverse('virtualization-api:api-root', request=request, format=format),
             'vpn': reverse('vpn-api:api-root', request=request, format=format),
             'wireless': reverse('wireless-api:api-root', request=request, format=format),
+            'phone': reverse('phone-api:api-root', request=request, format=format),
         })
 
 

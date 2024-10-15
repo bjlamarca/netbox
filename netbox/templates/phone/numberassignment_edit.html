@@ -1,0 +1,59 @@
+{% extends 'generic/object_edit.html' %}
+{% load form_helpers %}
+
+
+{% block header %}
+    {{ block.super }}
+    <script type="text/javascript">
+      window.addEventListener("load", ShowTypeRelated);
+      function ShowTypeRelated() {
+        let objecttype =  document.getElementById('id_object_type').options[document.getElementById('id_object_type').selectedIndex].text;
+        let userfield = document.getElementById('divusers');
+        let devicefield = document.getElementById('divdevices');
+        let contactfield = document.getElementById('divcontacts');
+        let objchoice = document.getElementById('divobjchoice');
+       
+        if (objecttype == "Users > User") {
+          userfield.style.display = 'block';
+          devicefield.style.display = 'none';
+          contactfield.style.display = 'none';
+        }
+        else if (objecttype == "DCIM > Device") {
+          userfield.style.display = 'none';
+          devicefield.style.display = 'block';
+          contactfield.style.display = 'none';
+        }
+        else if (objecttype == "Tenancy > Contact") {
+          userfield.style.display = 'none';
+          devicefield.style.display = 'none';
+          contactfield.style.display = 'block';
+        }
+                
+      }
+</script>
+{% endblock %}
+
+{% block form %}
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <strong>Phone Number Assignment</strong>
+  </div>
+  <div class="panel-body">
+      {% render_field form.number %}
+      {% render_field form.role %}
+      {% render_field form.object_type %}
+      <div id="divusers">
+        {% render_field form.users %}
+      </div>
+      <div id="divdevices">
+        {% render_field form.device %}
+      </div>
+      <div id="divcontacts">
+        {% render_field form.contacts %}
+      </div>
+      
+   </div>
+</div>
+
+{% endblock %}
