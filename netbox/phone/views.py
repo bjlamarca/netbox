@@ -100,11 +100,20 @@ class NumberAssignmentBulkDeleteView(generic.BulkDeleteView):
 class NumberAssignmentTestView(View):
     def post(self, request):
         from netbox.registry import registry
-        result = ""
-        for item in registry['plugins'].items():
-             result = result + '<p>' + str(item) + '</p>'
+        # from django.contrib.contenttypes.models import ContentType
+        # from django.db import models
+        result = "<ul>"
+        for item in registry['event_types'].items():
+              result = result + '<li>' + str(item) + '</li>'
         
-       
+        # # queryset=ObjectType.objects.all()
+        # # for item in queryset:
+        # #     result = result + '<p>' + str(item) + str(item.id) + '</p>'
+            
+        result = result + '</ul>'
+        # import datetime
+        # from phone.jobs import MyHousekeepingJob
+        # MyHousekeepingJob.enqueue(schedule_at=datetime.datetime(2024, 10, 18), )
         print("Hello")
         return HttpResponse(result, status=200)
 

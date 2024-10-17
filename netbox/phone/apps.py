@@ -8,7 +8,8 @@ class PhoneConfig(AppConfig):
     def ready(self) -> None:
         from phone.template_content import add_template_extensions
         from netbox.models.features import register_models
+        
         register_models(*self.get_models())
         add_template_extensions()
-
+       
         

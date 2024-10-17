@@ -4,7 +4,7 @@ from . import views
 
 
 router = NetBoxRouter()
-router.APIRootView = views.PhonePluginRootView
+router.APIRootView = views.PhoneRootView
 
 router.register('numbers', views.NumberViewSet)
 router.register('numberassignments', views.NumberAssignmentViewSet)
