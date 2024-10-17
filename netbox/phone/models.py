@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.utils.translation import gettext_lazy as _
+from django.utils.text import slugify
 from netbox.models import OrganizationalModel, NetBoxModel, PrimaryModel
 from django.core.validators import RegexValidator
 from phone.utils import format_phone
@@ -141,6 +142,10 @@ class NumberRole(OrganizationalModel):
 
     def get_absolute_url(self):
         return reverse("phone:numberrole", kwargs={"pk": self.pk})
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
 
 class VoiceCircuit(NetBoxModel):
     """A Voice Circuit represents a single circuit of one of the following types:
