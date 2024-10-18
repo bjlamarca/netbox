@@ -1,8 +1,17 @@
 {% load helpers %}
 {% if perms.phone.view_numberassigment %}
     <div class="card">
-        <h5 class="card-header">Assigned Numbers</h5>
+        <div class="card-header">
+            <h5>Assigned Numbers</h5>
+            <div class="card-actions">
+                <a class="btn btn-ghost-primary btn-sm" href="{% url 'phone:numberassignment_add' %}?caller=panel&object_type={{ object|content_type_id }}&object_id={{ object.pk }}&caller=panel&return_url={{ request.path }}">
+                    <span class="mdi mdi-plus-thick"></span>  Add Assignment
+                </a>
+            </div>
+        </div>
+        
         <div class="card-body">
+            
             
                 {% if number_assignment.exists %}
                     <form id="numberassignment_form">

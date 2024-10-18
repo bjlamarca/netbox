@@ -56,6 +56,7 @@ class NumberAssignmentForm(NetBoxModelForm):
         # Initialize helper selectors
         instance = kwargs.get('instance')
         initial = kwargs.get('initial', {}).copy()
+        print("Object", instance.object)
         if instance:
             if type(instance.object) is Device:
                 initial['device'] = instance.object

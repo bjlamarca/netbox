@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.views import View
+from django.shortcuts import get_object_or_404
 from core.models import ObjectType
 
 
@@ -20,6 +21,7 @@ class NumberView(generic.ObjectView):
     def get_extra_context(self, request, instance):
         table = NumberAssignmentTable(instance.assignments.all())
         table.configure(request)
+        table.columns.hide('number')
 
         return {
             'assignment_table': table,
@@ -76,10 +78,28 @@ class NumberAssignmentEditView(generic.ObjectEditView):
     form = model_forms.NumberAssignmentForm
     template_name='phone/numberassignment_edit.html'
 
+    def alter_object(self, instance, request, url_args, url_kwargs):
+        #If new instance, check where request came from
+        
+        if not instance.pk:
+            caller = request.GET.get('caller')
+            if caller == 'number':
+                instance.number = get_object_or_404(Number, pk=request.GET.get('number')) 
+            elif caller == 'panel':
+                content_type = get_object_or_404(ContentType, pk=request.GET.get('object_type'))
+                pk=request.GET.get('object_id')
+                print("Object", content_type.model_class(), pk)
+                instance.object = get_object_or_404(content_type.model_class(), pk=pk)
+                print("View object", instance.object)
+            else:
+                print('Else')
+
+           
+        return instance
+
 @register_model_view(NumberAssignment, 'delete')
 class NumberAssignmentDeleteView(generic.ObjectDeleteView):
     queryset = NumberAssignment.objects.all()
-
 
 class NumberAssignmentBulkEditView(generic.BulkEditView):
     queryset = NumberAssignment.objects.all()

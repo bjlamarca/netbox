@@ -1,0 +1,5 @@
+{% if perms.phone.add_numberassigment %}
+<a class="btn btn-primary btn-sm"
+       href="{% url 'number-assignments/add' %}?object_type={{ object|content_type_id }}&object_id={{ object.pk }}&return_url={{ request.path }}"><i
+            class="mdi mdi-plus-thick"></i> Add Assignment</a>0
+{% endif %}

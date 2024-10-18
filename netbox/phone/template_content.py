@@ -19,12 +19,21 @@ def number_assignment_panel(self):
         app_label, model = self.model.split('.')
         assigned_object_type = ContentType.objects.get(app_label=app_label, model=model).id
 
-        return self.render('phone/inc/phone_panel.html',
+        return self.render('phone/inc/numberassignment_panel.html',
             extra_context={
                 'number_assignment': NumberAssignment.objects.filter(object_type=assigned_object_type, object_id=obj.id),
             })
         
+def numberassignment_add_button(_app_model):
+    class Button(PluginTemplateExtension):
+        model = _app_model
 
+        def buttons(self):
+            return self.render(
+                'phone/inc/numberassigment_add_button.html',
+            )
+
+    return Button
 
 #Generate plugin extensions classes for each app, model
 def add_template_extensions():
