@@ -1,17 +1,31 @@
+from django import forms
 from django.utils.translation import gettext_lazy as _
 from core.models import ObjectType
 from netbox.forms import NetBoxModelFilterSetForm
 from phone.models import Number, NumberAssignment, NumberRole
+from phone.choices import *
 from utilities.forms.fields import DynamicModelMultipleChoiceField, TagFilterField, ContentTypeMultipleChoiceField
 from utilities.forms.rendering import FieldSet
 from dcim.models import Region
 from tenancy.models import Tenant
 from circuits.models import Provider
 
+__all__=[
+    'NumberFilterForm',
+    'NumberAssignmentFilterForm',
+    'NumberRoleFilterForm'
+
+
+]
 
 class NumberFilterForm(NetBoxModelFilterSetForm):
 
     model = Number
+    status = forms.MultipleChoiceField(
+        label=_('Status'),
+        choices=NumberStatusChoices,
+        required=False
+    )
     tenant = DynamicModelMultipleChoiceField(
         queryset=Tenant.objects.all(),
         to_field_name='id',

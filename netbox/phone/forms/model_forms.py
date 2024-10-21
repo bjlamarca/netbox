@@ -22,7 +22,7 @@ class NumberForm(NetBoxModelForm):
     
     class Meta:
         model = Number
-        fields = ('number', 'status','tenant', 'region', 'description', 'provider', 'forward_to', 'tags')
+        fields = ('number', 'status','tenant', 'region', 'description', 'provider', 'forward_to', 'tags', 'comments')
 
 class NumberAssignmentForm(NetBoxModelForm):
     
@@ -73,7 +73,6 @@ class NumberAssignmentForm(NetBoxModelForm):
         super().clean()
 
         clean_object_type = self.cleaned_data.get('object_type')
-        print("'", clean_object_type.model_class(), "'")
         if clean_object_type.model_class() == User:
             print("USER")
             if not self.cleaned_data.get('users'):

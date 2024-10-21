@@ -129,9 +129,7 @@ class NumberRole(OrganizationalModel):
     """
     Functional role for a Number assigned to an object.
     """
-    def get_absolute_url(self):
-        return reverse('phone:numberrole', args=[self.pk])
-
+    
     class Meta:
         ordering = ('name',)
         verbose_name = _('number role')

@@ -4,6 +4,7 @@ import django_tables2 as tables
 from .models import Number, VoiceCircuit, NumberAssignment, NumberRole
 from django.conf import settings
 from packaging import version
+from phone.utils import format_phone
 
 from netbox.tables import BaseTable, columns, NetBoxTable, ChoiceFieldColumn
 
@@ -17,7 +18,7 @@ class NumberTable(NetBoxTable):
     status = ChoiceFieldColumn(
         verbose_name=_('Status'),
     )
-    number_formatted = tables.Column(
+    number = tables.Column(
         verbose_name=_('Number'),
         linkify=True
     )
@@ -28,10 +29,14 @@ class NumberTable(NetBoxTable):
     tags = columns.TagColumn(
         url_name='phone:number_list'    
     )
+
+    def render_number(self, value):
+        return format_phone(value)
+    
     class Meta(BaseTable.Meta):
         model = Number
-        fields = ('id', 'number_formatted', 'status', 'tenant', 'region', 'description', 'provider', 'forward_to', 'tags')
-        default_columns = ('id', 'number_formatted', 'status', 'tenant', 'region', 'description', 'provider', 'forward_to', 'tags')
+        fields = ('id', 'number', 'status', 'tenant', 'region', 'description', 'provider', 'forward_to', 'tags')
+        default_columns = ('id', 'number', 'status', 'tenant', 'region', 'description', 'provider', 'forward_to', 'tags')
 
 class NumberRoleTable(NetBoxTable):
     name = tables.Column(

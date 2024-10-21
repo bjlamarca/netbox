@@ -5,6 +5,7 @@ from netbox.views.generic import ObjectChangeLogView
 from utilities.urls import get_model_urls
 
 
+
 app_name = 'phone'
 
 urlpatterns = [
@@ -40,3 +41,4 @@ urlpatterns = [
           'model': NumberRole
      }),
 ]
+

@@ -88,13 +88,8 @@ class NumberAssignmentEditView(generic.ObjectEditView):
             elif caller == 'panel':
                 content_type = get_object_or_404(ContentType, pk=request.GET.get('object_type'))
                 pk=request.GET.get('object_id')
-                print("Object", content_type.model_class(), pk)
                 instance.object = get_object_or_404(content_type.model_class(), pk=pk)
-                print("View object", instance.object)
-            else:
-                print('Else')
-
-           
+                
         return instance
 
 @register_model_view(NumberAssignment, 'delete')

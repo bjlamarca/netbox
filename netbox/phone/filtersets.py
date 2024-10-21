@@ -6,6 +6,7 @@ from django.utils.translation import gettext as _
 from netbox.filtersets import NetBoxModelFilterSet, OrganizationalModelFilterSet
 from utilities.filters import ContentTypeFilter, TreeNodeMultipleChoiceFilter
 from phone.models import *
+from phone.choices import *
 from tenancy.filtersets import TenancyFilterSet, ContactModelFilterSet
 from tenancy.models import Tenant
 from dcim.models import Region
@@ -23,6 +24,10 @@ class NumberFilterSet(NetBoxModelFilterSet, TenancyFilterSet,):
         to_field_name='number',
         label='number',
     )
+    status = django_filters.MultipleChoiceFilter(
+        choices=NumberStatusChoices,
+        null_value=None
+    )
     tenant = django_filters.ModelMultipleChoiceFilter(
         queryset=Tenant.objects.all(),
         field_name='tenant__id',
@@ -39,7 +44,7 @@ class NumberFilterSet(NetBoxModelFilterSet, TenancyFilterSet,):
         queryset=Provider.objects.all(),
         field_name='provider__id',
         to_field_name='id',
-        label='Region (id)',
+        label='Provider (id)',
     )
     forward_to = django_filters.ModelMultipleChoiceFilter(
         field_name='forward_to__id',

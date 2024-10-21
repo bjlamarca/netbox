@@ -36,14 +36,6 @@ ORGANIZATION_MENU = Menu(
                 get_model_item('tenancy', 'contactassignment', _('Contact Assignments'), actions=['import']),
             ),
         ),
-        MenuGroup(
-            label=_('Phone'),
-            items=(
-                get_model_item('phone', 'number', _('Numbers')),
-                get_model_item('phone', 'numberassignment', _('Number Assignments')),
-                get_model_item('phone', 'numberrole', _('Number Roles')),
-            ),
-        ),
     ),
 )
 
