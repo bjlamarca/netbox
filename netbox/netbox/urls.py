@@ -35,7 +35,8 @@ _patterns = [
     path('vpn/', include('vpn.urls')),
     path('wireless/', include('wireless.urls')),
     path('phone/', include('phone.urls')),
-    path('vault/', include('vault.urls')),    
+    path('vault/', include('vault.urls')),
+    path('mobile/', include('mobile.urls')),    
 
 
     # Current user views
@@ -58,6 +59,7 @@ _patterns = [
     path('api/wireless/', include('wireless.api.urls')),
     path('api/phone/', include('phone.api.urls')),
     path('api/vault/', include('vault.api.urls')),
+    path('api/mobile/', include('mobile.api.urls')),
     path('api/status/', StatusView.as_view(), name='api-status'),
 
     path(

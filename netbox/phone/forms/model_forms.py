@@ -51,6 +51,7 @@ class NumberAssignmentForm(NetBoxModelForm):
     class Meta:
         model = NumberAssignment
         fields = ('object_type', 'users', 'device', 'contacts', 'number','role')
+    
     def __init__(self, *args, **kwargs):
 
         # Initialize helper selectors

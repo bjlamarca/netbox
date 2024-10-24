@@ -118,7 +118,7 @@ class NumberAssignmentTestView(View):
         # from django.contrib.contenttypes.models import ContentType
         # from django.db import models
         result = "<ul>"
-        for item in registry['event_types'].items():
+        for item in registry['tables'].items():
               result = result + '<li>' + str(item) + '</li>'
         
         # # queryset=ObjectType.objects.all()
